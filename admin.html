@@ -1,8 +1,169 @@
+
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#e50914"><title>Painel | Red Celular</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="admin.css"></head>
-<body class="admin-body"><header class="admin-top"><a class="brand" href="index.html"><span class="brand-icon">▯</span><span><b>RED</b><strong>CELULAR</strong><small>PAINEL ADMINISTRATIVO</small></span></a><a class="btn" href="index.html">Ver catálogo ↗</a></header>
-<main class="admin-main"><div class="admin-heading"><div><p class="eyebrow">GESTÃO DA LOJA</p><h1>Produtos</h1><p class="muted">Cadastre e atualize os itens do catálogo neste navegador.</p></div><button id="newBtn" class="btn">+ Adicionar produto</button></div>
-<div class="notice"><b>Importante:</b> esta primeira versão salva os dados neste navegador/aparelho. Para compartilhar o catálogo atualizado entre vários aparelhos, será necessário conectar um banco de dados online.</div>
-<div class="admin-layout"><section class="panel"><div class="panel-head"><h2>Seu catálogo</h2><input id="filter" placeholder="Buscar produto..."></div><div id="productList"></div><div class="admin-actions"><button id="exportBtn" class="secondary">Exportar backup JSON</button><label class="secondary import-label">Importar backup<input type="file" id="importFile" accept=".json,application/json" hidden></label><button id="resetBtn" class="danger-ghost">Restaurar exemplos</button></div></section>
-<section class="panel form-panel"><h2 id="formTitle">Adicionar produto</h2><form id="productForm"><input type="hidden" id="id"><label>Nome do produto<input id="name" required placeholder="Ex.: iPhone 15 128GB"></label><div class="two"><label>Categoria<select id="category"><option>Celulares</option><option>Acessórios</option><option>Eletrônicos</option><option>Games</option><option>Informática</option><option>Utilidades</option><option>Presentes</option><option>Brinquedos</option><option>Outros</option></select></label><label>Preço (R$)<input id="price" type="number" min="0" step="0.01" required placeholder="0,00"></label></div><label>Descrição<textarea id="description" rows="3" placeholder="Cor, armazenamento, estado, garantia..."></textarea></label><label>Imagem do produto<input id="imageFile" type="file" accept="image/*"><small class="muted">A imagem será guardada localmente neste navegador. Para um catálogo grande, prefira imagens otimizadas.</small></label><div id="imagePreview" class="image-preview">Prévia da imagem</div><div class="form-actions"><button class="btn" type="submit">Salvar produto</button><button class="secondary" type="button" id="cancelBtn">Limpar</button></div></form></section></div></main>
-<script src="config.js"></script><script src="admin.js"></script></body></html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e50914">
+<title>Painel | Red Celular</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+#loginBox {
+  max-width: 380px;
+  margin: 70px auto;
+  padding: 28px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px #0002;
+  color: #222;
+}
+#loginBox input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin: 12px 0;
+}
+#loginBox button, #logoutBtn {
+  padding: 12px 18px;
+  cursor: pointer;
+}
+#adminContent[hidden], #loginBox[hidden] {
+  display: none !important;
+}
+</style>
+</head>
+<body class="admin-body">
+
+<header class="admin-top">
+  <a class="brand" href="index.html">
+    <span class="brand-icon">▯</span>
+    <span><b>RED</b><strong>CELULAR</strong>
+    <small>PAINEL ADMINISTRATIVO</small></span>
+  </a>
+  <a class="btn" href="index.html">Ver catálogo ↗</a>
+</header>
+
+<section id="loginBox">
+  <h1>Acesso administrativo</h1>
+  <p>Digite sua senha para abrir o painel.</p>
+  <form id="loginForm">
+    <input id="adminPassword" type="password"
+      placeholder="Senha" autocomplete="current-password" required>
+    <button type="submit" class="btn">Entrar</button>
+    <p id="loginMessage" role="alert"></p>
+  </form>
+</section>
+
+<div id="adminContent" hidden>
+  <div style="text-align:right;padding:12px 20px">
+    <button id="logoutBtn" type="button">Sair do painel</button>
+  </div>
+
+  <main class="admin-main">
+    <div class="admin-heading">
+      <div>
+        <p class="eyebrow">GESTÃO DA LOJA</p>
+        <h1>Produtos</h1>
+        <p class="muted">Cadastre e atualize os itens do catálogo neste navegador.</p>
+      </div>
+      <button id="newBtn" class="btn">+ Adicionar produto</button>
+    </div>
+
+    <div class="notice">
+      <b>Importante:</b> os produtos são salvos neste navegador/aparelho.
+    </div>
+
+    <div class="admin-layout">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Seu catálogo</h2>
+          <input id="filter" placeholder="Buscar produto...">
+        </div>
+        <div id="productList"></div>
+        <div class="admin-actions">
+          <button id="exportBtn" class="secondary">Exportar backup JSON</button>
+          <label class="secondary import-label">
+            Importar backup
+            <input type="file" id="importFile"
+              accept=".json,application/json" hidden>
+          </label>
+          <button id="resetBtn" class="danger-ghost">Restaurar exemplos</button>
+        </div>
+      </section>
+
+      <section class="panel form-panel">
+        <h2 id="formTitle">Adicionar produto</h2>
+        <form id="productForm">
+          <input type="hidden" id="id">
+          <label>Nome do produto
+            <input id="name" required placeholder="Ex.: iPhone 15 128GB">
+          </label>
+          <div class="two">
+            <label>Categoria
+              <select id="category">
+                <option>Celulares</option><option>Acessórios</option>
+                <option>Eletrônicos</option><option>Games</option>
+                <option>Informática</option><option>Utilidades</option>
+                <option>Presentes</option><option>Brinquedos</option>
+                <option>Outros</option>
+              </select>
+            </label>
+            <label>Preço (R$)
+              <input id="price" type="number" min="0" step="0.01"
+                required placeholder="0,00">
+            </label>
+          </div>
+          <label>Descrição
+            <textarea id="description" rows="3"></textarea>
+          </label>
+          <label>Imagem do produto
+            <input id="imageFile" type="file" accept="image/*">
+            <small class="muted">Imagem armazenada neste navegador.</small>
+          </label>
+          <div id="imagePreview" class="image-preview">Prévia da imagem</div>
+          <div class="form-actions">
+            <button class="btn" type="submit">Salvar produto</button>
+            <button class="secondary" type="button" id="cancelBtn">Limpar</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script src="config.js"></script>
+<script>
+const PASSWORD = "Red123";
+const loginBox = document.getElementById("loginBox");
+const adminContent = document.getElementById("adminContent");
+const loginForm = document.getElementById("loginForm");
+const passwordInput = document.getElementById("adminPassword");
+const loginMessage = document.getElementById("loginMessage");
+
+function closeAdmin() {
+  adminContent.hidden = true;
+  loginBox.hidden = false;
+  passwordInput.value = "";
+  loginMessage.textContent = "";
+}
+
+loginForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  if (passwordInput.value === PASSWORD) {
+    loginBox.hidden = true;
+    adminContent.hidden = false;
+    loginMessage.textContent = "";
+  } else {
+    loginMessage.textContent = "Senha incorreta. Tente novamente.";
+    passwordInput.value = "";
+  }
+});
+
+document.getElementById("logoutBtn").addEventListener("click", closeAdmin);
+closeAdmin();
+</script>
+<script src="admin.js"></script>
+</body>
+</html>
