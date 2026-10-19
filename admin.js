@@ -12,7 +12,23 @@ function del(id){const p=products.find(x=>x.id===id);if(p&&confirm(`Excluir "${p
 function showPreview(src){const el=document.getElementById("imagePreview");el.innerHTML=src?`<img src="${src}" alt="Prévia">`:"Prévia da imagem"}
 document.getElementById("imageFile").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;if(f.size>1200000){alert("A imagem precisa ter até 1,2 MB. Redimensione ou comprima a foto antes de enviar.");e.target.value="";return}const r=new FileReader();r.onload=()=>{pendingImage=r.result;showPreview(pendingImage)};r.readAsDataURL(f)});
 document.getElementById("productForm").addEventListener("submit",e=>{e.preventDefault();const id=document.getElementById("id").value||("p"+Date.now());const p={id,name:document.getElementById("name").value.trim(),category:document.getElementById("category").value,price:Number(document.getElementById("price").value),description:document.getElementById("description").value.trim(),image:pendingImage};if(!p.name||!Number.isFinite(p.price)||p.price<0){alert("Confira o nome e o preço.");return}const i=products.findIndex(x=>x.id===id);if(i>=0)products[i]=p;else products.unshift(p);save();render();clearForm();alert("Produto salvo neste navegador!")});
-document.getElementById("newBtn").onclick=clearForm;document.getElementById("cancelBtn").onclick=clearForm;document.getElementById("filter").oninput=render;
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("newBtn");
+
+  if (btn) {
+    btn.addEventListener("click", function () {
+      clearForm();
+
+      const painel = document.querySelector(".form-panel");
+      if (painel) {
+        painel.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    });
+  }
+});document.getElementById("cancelBtn").onclick=clearForm;document.getElementById("filter").oninput=render;
 document.getElementById("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(products,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="red-celular-backup.json";a.click();URL.revokeObjectURL(a.href)};
 document.getElementById("importFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data)||!confirm("Importar vai substituir a lista atual. Continuar?"))return;products=data;save();render();clearForm();alert("Backup importado.")}catch{alert("Arquivo JSON inválido.")}};r.readAsText(f);e.target.value=""};
 document.getElementById("resetBtn").onclick=()=>{if(confirm("Restaurar os produtos de demonstração? Isso substitui a lista atual neste navegador.")){products=DEFAULT_PRODUCTS;save();render();clearForm()}};
