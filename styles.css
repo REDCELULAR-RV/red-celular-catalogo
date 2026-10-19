@@ -79,6 +79,8 @@ a.whats-head,
   padding: 8px 12px;
   box-sizing: border-box;
   text-decoration: none;
+  background: transparent;
+  box-shadow: none;
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
