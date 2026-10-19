@@ -15,7 +15,9 @@
     "category": "Celulares",
     "price": 5900,
     "description": "128GB • Câmera de 48 MP • Tela de 6,7” • Chip A16 Bionic • Design premium",
-    "image": "",
+    
+"image": "images/bb539b2c-a3ef-43cd-9499-323ec2fc3832 (1).png",
+
     "featured": true
   },
   {
@@ -24,7 +26,9 @@
     "category": "Celulares",
     "price": 5400,
     "description": "128GB • Câmera tripla de 12 MP • Tela Super Retina XDR de 6,7” • Chip A15 Bionic • Design premium",
-    "image": "",
+   
+"image": "images/56a1b602-bc59-40bf-8a9b-7a1f87477937 (1).png",
+
     "featured": true
   },
   {
