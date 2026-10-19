@@ -59,3 +59,13 @@
     "featured": true
   }
 ]
+
+{
+  "id": "samsung-galaxy-a07-256gb",
+  "name": "Samsung Galaxy A07 256GB",
+  "category": "Celulares",
+  "price": 1699,
+  "description": "256GB • Câmera principal de 50 MP • Tela de 6,7” com taxa de atualização de 90 Hz • Processador Octa-Core • Bateria de 5.000 mAh",
+  "image": "images/samsung-galaxy-a07-256gb.png",
+  "featured": true
+}
