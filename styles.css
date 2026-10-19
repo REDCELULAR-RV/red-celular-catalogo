@@ -58,3 +58,14 @@
   font-size: 10px;
   color: var(--muted);
 }
+.whats-head {
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whats-head:hover {
+  background: rgba(34, 197, 94, 0.10);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.20);
+}
