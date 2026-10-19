@@ -5,9 +5,53 @@
     "name": "Samsung Galaxy A17",
     "category": "Celulares",
     "price": 1750,
-    "description": "Consulte disponibilidade",
+    "description": "128GB • Câmera tripla com sensor principal de 50 MP • Tela Super AMOLED de 6,7” • Processador Octa-Core para o dia a dia • Bateria de 5.000 mAh para maior autonomia",
     "image": "images/Samsung Galaxy A17 em Estúdio Neon (1).png",
+    "featured": true
+  },
+  {
+    "id": "iphone-14-pro-max",
+    "name": "iPhone 14 Pro Max Lacrado CPO",
+    "category": "Celulares",
+    "price": 5900,
+    "description": "128GB • Câmera de 48 MP • Tela de 6,7” • Chip A16 Bionic • Design premium",
+    "image": "",
+    "featured": true
+  },
+  {
+    "id": "iphone-13-pro-max",
+    "name": "iPhone 13 Pro Max Lacrado CPO",
+    "category": "Celulares",
+    "price": 5400,
+    "description": "128GB • Câmera tripla de 12 MP • Tela Super Retina XDR de 6,7” • Chip A15 Bionic • Design premium",
+    "image": "",
+    "featured": true
+  },
+  {
+    "id": "samsung-a57-5g",
+    "name": "Samsung Galaxy A57 5G",
+    "category": "Celulares",
+    "price": 3450,
+    "description": "256GB • Câmera tripla de 50 MP • Tela Super AMOLED de 6,7” com 120 Hz • Processador Octa-Core • Bateria de 5.000 mAh • Conexão 5G",
+    "image": "images/Samsung Galaxy A57 5G em destaque (1).png",
+    "featured": true
+  },
+  {
+    "id": "samsung-a37-5g",
+    "name": "Samsung Galaxy A37 5G",
+    "category": "Celulares",
+    "price": 2950,
+    "description": "256GB • Câmera tripla de até 50 MP • Tela Super AMOLED de 6,7” com 120 Hz • Processador Octa-Core • Bateria de 5.000 mAh • Conexão 5G",
+    "image": "images/Samsung Galaxy A37 5G em Destaque (1).png",
+    "featured": true
+  },
+  {
+    "id": "samsung-a17-5g",
+    "name": "Samsung Galaxy A17 5G",
+    "category": "Celulares",
+    "price": 1900,
+    "description": "128GB • Câmera tripla de até 50 MP • Tela Super AMOLED de 6,7” com 90 Hz • Processador Octa-Core • Bateria de 5.000 mAh • Conexão 5G",
+    "image": "images/Promoção Galaxy A17 5G em Destaque (1).png",
     "featured": true
   }
 ]
-
