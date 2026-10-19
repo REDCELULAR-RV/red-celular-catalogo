@@ -69,3 +69,21 @@
   background: rgba(34, 197, 94, 0.10);
   box-shadow: 0 0 8px rgba(34, 197, 94, 0.20);
 }
+a.whats-head,
+.whats-head {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #22c55e !important;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  text-decoration: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+a.whats-head:hover,
+.whats-head:hover {
+  background: rgba(34, 197, 94, 0.10);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.20);
+}
